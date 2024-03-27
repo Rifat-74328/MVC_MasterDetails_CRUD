@@ -1,0 +1,86 @@
+﻿@model IEnumerable<MVC_MasterDetails_CRUD.Models.Applicant>
+@{
+    ViewBag.Title = "Details";
+}
+<h2>Applicant Information</h2>
+
+@foreach (var item in Model)
+{
+    <table class="table table-bordered col col-md-12">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Birthday)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalExprience)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PicPath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAvilable)
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Birthday)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalExprience)
+            </td>
+            <td>
+                @Html.HiddenFor(modelItem => item.PicPath)
+                @if (item != null)
+                {
+                    <img src="@Url.Content(item.PicPath)" class="img-thumbnail" alt="@item.Picture" style="width: 100px" />
+                }
+            </td>
+            <td>
+                @(item.IsAvilable ? "Avilable":"Busy!")
+                @*@Html.DisplayFor(modelItem => item.IsAvilable)*@
+                @*@Html.DisplayFor(modelItem => item.Birthday != null ? "Available" : "Not Available")*@
+                @*@Html.DisplayText(item.IsAvilable ? "Available" : "Not Available")*@
+            </td>
+        </tr>
+    </table>
+    
+    <table class="table table-info">
+                <tr>
+                    <th>
+                        Company
+                    </th>
+                    <th>
+                        Designation
+                    </th>
+                    <th>
+                        Years Of Exprience
+                    </th>
+                </tr>
+
+                @foreach (var exprience in item.Applicant_Exprience)
+                {
+                    <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => exprience.CompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => exprience.Disignation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => exprience.YearOfExprience)
+                    </td>
+                    </tr>
+                }
+            </table>
+}
+
+
+
+
